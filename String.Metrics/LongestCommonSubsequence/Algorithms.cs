@@ -9,10 +9,10 @@ namespace String.Metrics.LongestCommonSubsequence;
 public class Algorithms
 {
     /// <summary>
-    /// 
+    /// Calculate length of longest common subsequence using recursively defined matrix.
+    /// <para>This method requires O(mn) time and space.</para>
     /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
+    /// <returns>Length of longest common subsequence.</returns>
     /// <see cref="Alberto Apostolico, Zvi Galil - Pattern Matching Algorithms (1997): Classical LCS Algorithm"/>
     public static int ClassicalLengthOnly(string x, string y)
     {
@@ -41,6 +41,11 @@ public class Algorithms
         return L[m, n];
     }
 
+    /// <summary>
+    /// Calculate length of longest common subsequence using recursively defined matrix.
+    /// <para>This method requires O(mn) time and space.</para>
+    /// </summary>
+    /// <see cref="Alberto Apostolico, Zvi Galil - Pattern Matching Algorithms (1997): Classical LCS Algorithm"/>
     public static LongestCommonSubsequence Classical(string x, string y)
     {
         var m = x.Length;
@@ -107,7 +112,7 @@ public class Algorithms
                     }
                 }
                 subsequence = b.ToString();
-                x_start = i;
+                x_start = i; 
                 y_start = j;
             }
         }
