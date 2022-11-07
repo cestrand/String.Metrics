@@ -121,4 +121,33 @@ public class Algorithms
         return lcs;
     }
 
+    /// <summary>
+    /// Calculate length of longest common subsequence.
+    /// <para>This method requires O(n) time and space.</para>
+    /// </summary>
+    /// <see cref="Alberto Apostolico, Zvi Galil - Pattern Matching Algorithms (1997): Classical LCS Algorithm"/>
+    public static int FindRow(string x, string y)
+    {
+        var m = x.Length;
+        var n = y.Length;
+        var L = new int[n+1];
+        for (int i = 1; i <= m; i++)
+        {
+            var Lnew = new int[n+1];
+            for (int j = 1; j <= n; j++)
+            {
+                if (x[i-1] == y[j-1])
+                {
+                    Lnew[j] = 1 + L[j-1];
+                }
+                else
+                {
+                    Lnew[j] = Math.Max(Lnew[j - 1], L[j]);
+                }
+            }
+            Array.Copy(Lnew, L, n+1);
+        }
+        return L[n];
+    }
+
 }

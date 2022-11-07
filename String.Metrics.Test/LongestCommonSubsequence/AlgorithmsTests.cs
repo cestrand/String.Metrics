@@ -55,4 +55,26 @@ public class AlgorithmsTests
             new LongestCommonSubsequence(0, 0, "abcde"),
             Algorithms.Classical("abcde", "abcde"));
     }
+
+    [TestMethod()]
+    public void FindRowTest()
+    {
+        int l1 = Algorithms.FindRow("balbina", "albinos");
+        Assert.AreEqual(5, l1); // albin is Longest Common Subsequence
+
+        int l2 = Algorithms.FindRow("mirosław", "mirosławie");
+        Assert.AreEqual(8, l2); // mirosław is Longest Common Subsequence
+
+        int l3 = Algorithms.FindRow("", "mirosławie");
+        int l4 = Algorithms.FindRow("mirosław", "");
+        Assert.AreEqual(0, l3);
+        Assert.AreEqual(0, l4);
+
+        int l5 = Algorithms.FindRow("abcde", "fghij");
+        Assert.AreEqual(0, l5);
+
+        Assert.AreEqual(
+            5,
+            Algorithms.FindRow("abcde", "abcde"));
+    }
 }
