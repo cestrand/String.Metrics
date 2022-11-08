@@ -150,4 +150,63 @@ public class Algorithms
         return L[n];
     }
 
+    /// <summary>
+    /// Calculate length of longest common subsequence.
+    /// <para>This method requires O(n) time and space.</para>
+    /// </summary>
+    /// <see cref="Alberto Apostolico, Zvi Galil - Pattern Matching Algorithms (1997): Classical LCS Algorithm"/>
+    public static int FindMid(string x, string y)
+    {
+        var m = x.Length;
+        var n = y.Length;
+        var L = new int[n + 1];
+        for (int i = 1; i <= m; i++)
+        {
+            var Lnew = new int[n + 1];
+            for (int j = 1; j <= n; j++)
+            {
+                if (x[i - 1] == y[j - 1])
+                {
+                    Lnew[j] = 1 + L[j - 1];
+                }
+                else
+                {
+                    Lnew[j] = Math.Max(Lnew[j - 1], L[j]);
+                }
+            }
+            Array.Copy(Lnew, L, n + 1);
+        }
+        int[] P = Enumerable.Range(0, n).ToArray();
+        for (int i = (int)Math.Ceiling(m/2.0m); i <= m; i++)
+        {
+            var Lnew = new int[n + 1];
+            var Pnew = new int[n + 1];
+            for (int j = 1; j <= n; j++)
+            {
+                if (x[i] == y[j])
+                {
+                    Lnew[j] = 1 + L[j - 1];
+                }
+                else
+                {
+                    Lnew[j] = Math.Max(Lnew[j - 1], L[j]);
+                }
+                if (x[i] == y[j])
+                {
+                    Pnew[j] = P[j - 1];
+                }
+                else if (Lnew[j-1] > L[j])
+                {
+                    Pnew[j] = Pnew[j - 1];
+                }
+                else
+                {
+                    Pnew[j] = P[j];
+                }
+            }
+            Array.Copy(Lnew, L, n + 1);
+            Array.Copy(Pnew, P, n + 1);
+        }
+        return P[n];
+    }
 }
